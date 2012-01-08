@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Jasmine Spec Runner</title>
+        <link rel="stylesheet" href="../src/lib/bootstrap.css" type="text/css">
+        <link rel="stylesheet" href="../src/jasmine-bootstrap.css" type="text/css">        
+    </head>
+
+    <body>
+        <!-- load jasmine -->
+        <script type="text/javascript" src="jasmine.js"></script>
+        <script type="text/javascript" src="../src/jasmine-bootstrap.js"></script>
+
+        <!-- load your spec files -->
+        <script type="text/javascript" src="spec/all_the_specs.js"></script>
+
+        <!-- run specs -->
+        <script type="text/javascript">
+          jasmine.getEnv().addReporter(new jasmine.BootstrapReporter());
+          jasmine.getEnv().execute();
+        </script>
+    </body>
+</html>
