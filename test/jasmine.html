@@ -17,7 +17,9 @@
 
         <!-- run specs -->
         <script type="text/javascript">
-          jasmine.getEnv().addReporter(new jasmine.BootstrapReporter());
+          var reporter = new jasmine.BootstrapReporter();
+          jasmine.getEnv().addReporter(reporter);
+          jasmine.getEnv().specFilter = function(){return reporter.specFilter.apply(reporter, arguments);};
           jasmine.getEnv().execute();
         </script>
     </body>
