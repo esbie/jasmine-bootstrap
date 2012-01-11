@@ -30,6 +30,8 @@ jasmine.BootstrapReporter.prototype.createDom = function(type, attrs, childrenVa
 
 jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
   var showPassed, showSkipped;
+  var checkPassed = !!this.getLocation().search.match("showPassed=true");
+  var checkSkipped = !!this.getLocation().search.match("showSkipped=true");
 
   this.outerDiv = this.createDom('div', { className: 'jasmine_reporter container' },
       this.createDom('h1', { className: 'banner well' },
@@ -38,11 +40,11 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
             this.createDom('small', { className: 'version' }, runner.env.versionString())),
         this.createDom('span', { className: 'options' },
             this.createDom('label', {}, 
-                showPassed = this.createDom('input', { id: "__jasmine_TrivialReporter_showPassed__", type: 'checkbox' }),
+                showPassed = this.createDom('input', checkPassed ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
                 this.createDom('span', {}, " show passed ")),
             
             this.createDom('label', {}, 
-                showSkipped = this.createDom('input', { id: "__jasmine_TrivialReporter_showSkipped__", type: 'checkbox' }),
+                showSkipped = this.createDom('input', checkSkipped ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
                 this.createDom('span', {}, " show skipped"))
         )
       ),
@@ -59,8 +61,8 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
   for (var i = 0; i < suites.length; i++) {
     var suite = suites[i];
     var suiteDiv = this.createDom('div', { className: 'suite alert-message block-message' },
-        this.createDom('a', { className: 'run_spec btn mini info', href: '?spec=' + encodeURIComponent(suite.getFullName()) }, "run"),
-        this.createDom('a', { className: 'description', href: '?spec=' + encodeURIComponent(suite.getFullName()) }, suite.description));
+        this.createDom('a', { className: 'run_spec btn mini info', href: this.specHref(suite) }, "run"),
+        this.createDom('a', { className: 'description', href: this.specHref(suite) }, suite.description));
     this.suiteDivs[suite.id] = suiteDiv;
     var parentDiv = this.outerDiv;
     if (suite.parentSuite) {
@@ -71,20 +73,31 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
 
   this.startedAt = new Date();
 
+  if (checkPassed) {
+    this.outerDiv.className += ' show-passed';
+  }
+  if (checkSkipped) {
+    this.outerDiv.className += ' show-skipped';
+  }
+
   var self = this;
   showPassed.onclick = function(evt) {
     if (showPassed.checked) {
       self.outerDiv.className += ' show-passed';
+      window.location += self.document.location.search.length ? "&showPassed=true" : "?showPassed=true";
     } else {
       self.outerDiv.className = self.outerDiv.className.replace(/ show-passed/, '');
+      window.location = window.location.href.replace(/&?showPassed=true|\?showPassed=true$/, '');
     }
   };
 
   showSkipped.onclick = function(evt) {
     if (showSkipped.checked) {
       self.outerDiv.className += ' show-skipped';
+      window.location += self.document.location.search.length ? "&showSkipped=true" : "?showSkipped=true";
     } else {
       self.outerDiv.className = self.outerDiv.className.replace(/ show-skipped/, '');
+      window.location = window.location.href.replace(/&?showSkipped=true|\?showSkipped=true$/, '');      
     }
   };
 };
@@ -131,10 +144,10 @@ jasmine.BootstrapReporter.prototype.reportSpecResults = function(spec) {
     status = 'skipped info';
   }
   var specDiv = this.createDom('div', { className: 'spec alert-message '  + status },
-      this.createDom('a', { className: 'run_spec btn mini info', href: '?spec=' + encodeURIComponent(spec.getFullName()) }, "run"),
+      this.createDom('a', { className: 'run_spec btn mini info', href: this.specHref(spec) }, "run"),
       this.createDom('a', {
         className: 'description',
-        href: '?spec=' + encodeURIComponent(spec.getFullName()),
+        href: this.specHref(spec),
         title: spec.getFullName()
       }, spec.description));
 
@@ -173,17 +186,26 @@ jasmine.BootstrapReporter.prototype.log = function() {
   }
 };
 
+jasmine.BootstrapReporter.prototype.specHref = function(spec) {
+  return '?spec=' + encodeURIComponent(spec.getFullName()) + this.getLocation().search.replace('?', '&');
+}
+
 jasmine.BootstrapReporter.prototype.getLocation = function() {
   return this.document.location;
 };
 
-jasmine.BootstrapReporter.prototype.specFilter = function(spec) {
+jasmine.BootstrapReporter.prototype.getParamMap = function() {
   var paramMap = {};
   var params = this.getLocation().search.substring(1).split('&');
   for (var i = 0; i < params.length; i++) {
     var p = params[i].split('=');
     paramMap[decodeURIComponent(p[0])] = decodeURIComponent(p[1]);
   }
+  return paramMap;
+}
+
+jasmine.BootstrapReporter.prototype.specFilter = function(spec) {
+  var paramMap = this.getParamMap();
 
   if (!paramMap.spec) {
     return true;
