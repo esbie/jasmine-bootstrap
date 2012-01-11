@@ -37,7 +37,7 @@ Starting the BootstrapReporter is just like starting the TrivialReporter:
 ```
 Full example is in the test/ directory
 
-Author
+Authors
 -------
 
 **Sarah Brown**
@@ -45,10 +45,16 @@ Author
 + http://twitter.com/esbie
 + http://github.com/esbie
 
+**Nando Vieira (jasmine-standalone)**
++ http://github.com/fnando/jasmine-standalone
+
+**Mark Otto and Jacob Thorton (bootstrap)**
++ http://twitter.github.com/bootstrap
+
 License
 ---------------------
 
-Copyright (c) 2011, Esbie
+Copyright (c) 2011, Sarah Brown
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
