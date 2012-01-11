@@ -19,7 +19,7 @@ I kept all the TrivialReporter's css classes and most all of its html structure 
 Usage
 -----
 
-Grab everything in src/ and link to them in you html file:
+Grab everything in src/ and link to them in your html file:
 
 ``` html
 <link rel="stylesheet" href="src/lib/bootstrap.css" type="text/css">
