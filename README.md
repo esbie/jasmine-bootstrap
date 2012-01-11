@@ -12,6 +12,7 @@ Here's what the default jasmine-html.js looks like for comparison:
 I kept all the TrivialReporter's css classes and most all of its html structure intact. That way jasmine-bootstrap should work with whatever ci you may have already built around the TrivialReporter.
 
 **Does the jasmine-bootstrap reporter change anything else?**
+
 + showSkipped and showPassed are now url parameters that persist on suite re-run.
 + the spec url parameter is respected by the entire suite, not just by the total number of specs run.
 
@@ -26,7 +27,6 @@ Grab everything in src/ and link to them in you html file:
 <script type="text/javascript" src="src/jasmine-bootstrap.js"></script>
 ```
 You could also grab the minified version of bootstrap.css from http://twitter.github.com/bootstrap if you want.
-
 Starting the BootstrapReporter is just like starting the TrivialReporter:
 
 ``` html
