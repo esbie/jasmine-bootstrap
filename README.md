@@ -46,9 +46,11 @@ Authors
 + http://github.com/esbie
 
 **Nando Vieira (jasmine-standalone)**
+
 + http://github.com/fnando/jasmine-standalone
 
 **Mark Otto and Jacob Thorton (bootstrap)**
+
 + http://twitter.github.com/bootstrap
 
 License
