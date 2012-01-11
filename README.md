@@ -3,16 +3,17 @@ JASMINE-BOOTSTRAP
 
 Do you like writing jasmine specs, but find the TrivialReporter underwhelming to look at? I took the standalone runner at http://github.com/fnando/jasmine-standalone and Twitter's bootstrap css at http://twitter.github.com/bootstrap to create jasmine-bootstrap. Here's what it looks like:
 
-![BootstrapReporter](url)
+![BootstrapReporter](https://github.com/esbie/jasmine-bootstrap/raw/master/test/BootstrapReporter.png)
 
 Here's what the default jasmine-html.js looks like for comparison:
 
-![TrivialReporter](url)
+![TrivialReporter](https://github.com/esbie/jasmine-bootstrap/raw/master/test/TrivialReporter.png)
 
 I kept all the TrivialReporter's css classes and most all of its html structure intact. That way jasmine-bootstrap should work with whatever ci you may have already built around the TrivialReporter.
 
-* Does the jasmine-bootstrap reporter add any other enhancements? *
-Not yet, but I'm working on a couple of other things that have always bothered me about the TrivialReporter, so we'll see.
+* Does the jasmine-bootstrap reporter change anything else? *
++ showSkipped and showPassed are now url parameters that persist on suite re-run.
++ the spec url parameter is respected by the entire suite, not just by the total number of specs run.
 
 Usage
 -----
