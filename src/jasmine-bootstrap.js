@@ -30,8 +30,8 @@ jasmine.BootstrapReporter.prototype.createDom = function(type, attrs, childrenVa
 
 jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
   var showPassed, showSkipped;
-  var checkPassed = !!this.getLocation().search.match("showPassed=true");
-  var checkSkipped = !!this.getLocation().search.match("showSkipped=true");
+  this.checkPassed = !!this.getLocation().search.match("showPassed=true");
+  this.checkSkipped = !!this.getLocation().search.match("showSkipped=true");
 
   this.outerDiv = this.createDom('div', { className: 'jasmine_reporter container' },
       this.createDom('h1', { className: 'banner well' },
@@ -40,11 +40,11 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
             this.createDom('small', { className: 'version' }, runner.env.versionString())),
         this.createDom('span', { className: 'options' },
             this.createDom('label', {}, 
-                showPassed = this.createDom('input', checkPassed ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
+                showPassed = this.createDom('input', this.checkPassed ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
                 this.createDom('span', {}, " show passed ")),
             
             this.createDom('label', {}, 
-                showSkipped = this.createDom('input', checkSkipped ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
+                showSkipped = this.createDom('input', this.checkSkipped ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
                 this.createDom('span', {}, " show skipped"))
         )
       ),
@@ -73,30 +73,26 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
 
   this.startedAt = new Date();
 
-  if (checkPassed) {
+  if (this.checkPassed) {
     this.outerDiv.className += ' show-passed';
   }
-  if (checkSkipped) {
+  if (this.checkSkipped) {
     this.outerDiv.className += ' show-skipped';
   }
 
   var self = this;
   showPassed.onclick = function(evt) {
     if (showPassed.checked) {
-      self.outerDiv.className += ' show-passed';
-      window.location += self.document.location.search.length ? "&showPassed=true" : "?showPassed=true";
+      window.location = window.location.href.replace(/\?$/, '') + (self.document.location.search.length ? "&showPassed=true" : "?showPassed=true");
     } else {
-      self.outerDiv.className = self.outerDiv.className.replace(/ show-passed/, '');
       window.location = window.location.href.replace(/&?showPassed=true|\?showPassed=true$/, '');
     }
   };
 
   showSkipped.onclick = function(evt) {
     if (showSkipped.checked) {
-      self.outerDiv.className += ' show-skipped';
-      window.location += self.document.location.search.length ? "&showSkipped=true" : "?showSkipped=true";
+      window.location = window.location.href.replace(/\?$/, '') + (self.document.location.search.length ? "&showSkipped=true" : "?showSkipped=true");
     } else {
-      self.outerDiv.className = self.outerDiv.className.replace(/ show-skipped/, '');
       window.location = window.location.href.replace(/&?showSkipped=true|\?showSkipped=true$/, '');      
     }
   };
@@ -187,7 +183,7 @@ jasmine.BootstrapReporter.prototype.log = function() {
 };
 
 jasmine.BootstrapReporter.prototype.specHref = function(spec) {
-  return '?spec=' + encodeURIComponent(spec.getFullName()) + this.getLocation().search.replace('?', '&');
+  return '?spec=' + encodeURIComponent(spec.getFullName()) + (this.checkPassed ? '&showPassed=true': '') + (this.checkSkipped ? '&showSkipped=true' : '');
 }
 
 jasmine.BootstrapReporter.prototype.getLocation = function() {
