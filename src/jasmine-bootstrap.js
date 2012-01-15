@@ -2,6 +2,9 @@ jasmine.BootstrapReporter = function(doc) {
   this.document = doc || document;
   this.suiteDivs = {};
   this.logRunningSpecs = false;
+  var self = this;
+  //automatically use the spec filter supplied by the reporter
+  jasmine.getEnv().specFilter = function(){return self.specFilter.apply(self, arguments);};
 };
 
 jasmine.BootstrapReporter.prototype.createDom = function(type, attrs, childrenVarArgs) {
