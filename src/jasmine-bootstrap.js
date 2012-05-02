@@ -41,19 +41,19 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
         this.createDom('span', { className: 'logo' },
             this.createDom('span', { className: 'title' }, "Jasmine"),
             this.createDom('small', { className: 'version' }, runner.env.versionString())),
-        this.createDom('span', { className: 'options' },
-            this.createDom('label', {}, 
+        this.createDom('span', { className: 'options form-inline' },
+            this.createDom('label', { className: 'checkbox' },
                 showPassed = this.createDom('input', this.checkPassed ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
                 this.createDom('span', {}, " show passed ")),
             
-            this.createDom('label', {}, 
+            this.createDom('label', { className: 'checkbox' },
                 showSkipped = this.createDom('input', this.checkSkipped ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
                 this.createDom('span', {}, " show skipped"))
         )
       ),
 
-      this.runnerDiv = this.createDom('div', { className: 'alert-message warning runner running' },
-          this.createDom('a', { className: 'run_spec btn mini info', href: '?' }, "run all"),
+      this.runnerDiv = this.createDom('div', { className: 'alert warning runner running' },
+          this.createDom('a', { className: 'run_spec btn btn-mini btn-info', href: '?' }, "run all"),
           this.runnerMessageSpan = this.createDom('span', {}, "Running..."),
           this.finishedAtSpan = this.createDom('span', { className: 'finished-at' }, ""))
       );
@@ -63,8 +63,8 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
   var suites = runner.suites();
   for (var i = 0; i < suites.length; i++) {
     var suite = suites[i];
-    var suiteDiv = this.createDom('div', { className: 'suite alert-message block-message' },
-        this.createDom('a', { className: 'run_spec btn mini info', href: this.specHref(suite) }, "run"),
+    var suiteDiv = this.createDom('div', { className: 'suite alert alert-block' },
+        this.createDom('a', { className: 'run_spec btn btn-mini btn-info', href: this.specHref(suite) }, "run"),
         this.createDom('a', { className: 'description', href: this.specHref(suite) }, suite.description));
     this.suiteDivs[suite.id] = suiteDiv;
     var parentDiv = this.outerDiv;
@@ -103,7 +103,7 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
 
 jasmine.BootstrapReporter.prototype.reportRunnerResults = function(runner) {
   var results = runner.results();
-  var className = (results.failedCount > 0) ? "alert-message error runner failed" : "alert-message success runner passed";
+  var className = (results.failedCount > 0) ? "alert alert-error runner failed" : "alert alert-success runner passed";
   this.runnerDiv.setAttribute("class", className);
   //do it twice for IE
   this.runnerDiv.setAttribute("className", className);
@@ -123,9 +123,9 @@ jasmine.BootstrapReporter.prototype.reportRunnerResults = function(runner) {
 
 jasmine.BootstrapReporter.prototype.reportSuiteResults = function(suite) {
   var results = suite.results();
-  var status = results.passed() ? 'passed success' : 'failed error';
+  var status = results.passed() ? 'passed alert-success' : 'failed alert-error';
   if (results.totalCount === 0) { // todo: change this to check results.skipped
-    status = 'skipped info';
+    status = 'skipped alert-info';
   }
   this.suiteDivs[suite.id].className += " " + status;
 };
@@ -138,12 +138,12 @@ jasmine.BootstrapReporter.prototype.reportSpecStarting = function(spec) {
 
 jasmine.BootstrapReporter.prototype.reportSpecResults = function(spec) {
   var results = spec.results();
-  var status = results.passed() ? 'passed success' : 'failed error';
+  var status = results.passed() ? 'passed alert-success' : 'failed alert-error';
   if (results.skipped) {
-    status = 'skipped info';
+    status = 'skipped alert-info';
   }
-  var specDiv = this.createDom('div', { className: 'spec alert-message '  + status },
-      this.createDom('a', { className: 'run_spec btn mini info', href: this.specHref(spec) }, "run"),
+  var specDiv = this.createDom('div', { className: 'spec alert '  + status },
+      this.createDom('a', { className: 'run_spec btn btn-mini btn-info', href: this.specHref(spec) }, "run"),
       this.createDom('a', {
         className: 'description',
         href: this.specHref(spec),

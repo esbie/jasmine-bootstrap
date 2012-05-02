@@ -5,59 +5,82 @@
 .options, .run_spec {
   float: right;
 }
-  
+
 .options label {
-  text-align: left;
-  padding-top: 14px;
+  padding: 10px;
 }
 
-/* buttons have to be pretty small to fit inline, so here's a mini size */
-.btn.mini {
-  padding: 2px 9px 2px;
-  font-size: 11px;
+/* actually kind of liked these styles from the previous bootstrap */
+.spec.alert.alert-error, .runner.alert.alert-error{
+  background-color: #C43C35;
+  border-color: #B32B24;
 }
 
-/* even with that mini size, these buttons don't quite fit inline! */
+.spec.alert.alert-success, .runner.alert.alert-success {
+  background-color: #57A957;
+  border-color: #469846;
+}
+
+/* even with the mini size, these buttons don't quite fit inline! */
 .run_spec {
   margin-top: -2px;
 }
 
+.alert-block .run-spec {
+  margin-top: -4px;
+}
+
 /* margin bottom on alert messages is a little too generous for our purposes */
-.alert-message, .well {
+.alert, .well {
   margin-bottom: 8px;
 }
 
+.alert {
+  padding: 8px 14px;
+}
+
 /* by default, a's inside alert-messages are black, but that makes them too hard to read */
-.alert-message.success a {
+.alert.alert-success a {
   color: #efe;
 }
 
-.alert-message.error a {
+.alert.alert-error a {
   color: #fee;
 }
 
-.alert-message.info a {
+.alert.alert-info a {
   color: #dff;
 }
 
-.alert-message a.run_spec {
+.alert a.run_spec {
   color: #fff;
 }
 
+.alert a, .alert .finished-at, .alert .fail {
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+}
+
+.alert .fail {
+  color: #fee;
+  padding: 5px 0 10px;
+}
+
 /* overwrite the above styles for the suite description, which needs to be black ;) */
-.alert-message.block-message > a.description {
+.alert.alert-block > a.description {
   color: #404040;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
 }
 
 /* padding on block messages is a little too generous for our purposes */
-.suite.alert-message.block-message {
+.suite.alert.alert-block {
   padding-top: 8px;
   padding-bottom: 8px;
 }
 
 /* alert messages inside alert message are given too generous of a line-height */
-.alert-message div.spec, .alert-message div.suite {
+.alert div.spec, .alert div.suite {
   line-height: normal;
+  margin-top: 6px;
 }
 
 .show-passed .suite.passed,
@@ -72,14 +95,14 @@
   display: none;
 }
 
-/* taken from jasmine.css */
 .finished-at {
   padding-left: 1em;
   font-size: .6em;
+  color: #FFF;
 }
 
 /* pre block text inside alert messages gets a little out of whack */
-.alert-message.error .messages pre {
+.alert.alert-error .messages pre {
   color: #404040;
   line-height: normal;
 }
