@@ -206,8 +206,14 @@ jasmine.BootstrapReporter.prototype.getParamMap = function() {
 jasmine.BootstrapReporter.prototype.specFilter = function(spec) {
   var paramMap = this.getParamMap();
 
-  if (!paramMap.spec) {
+  if (paramMap.spec) {
+    return spec.getFullName().indexOf(paramMap.spec) === 0;
+  } else if (paramMap.spec_matching) {
+    if (!this.specMatchingRegex) {
+      this.specMatchingRegex = new RegExp(paramMap.spec_matching);
+    }
+    return this.specMatchingRegex.test(spec.getFullName());
+  } else {
     return true;
   }
-  return spec.getFullName().indexOf(paramMap.spec) === 0;
 };
