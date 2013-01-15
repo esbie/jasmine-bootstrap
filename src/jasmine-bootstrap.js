@@ -45,7 +45,7 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
             this.createDom('label', { className: 'checkbox' },
                 showPassed = this.createDom('input', this.checkPassed ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
                 this.createDom('span', {}, " show passed ")),
-            
+
             this.createDom('label', { className: 'checkbox' },
                 showSkipped = this.createDom('input', this.checkSkipped ? { type: 'checkbox', checked: 'true' } : { type: 'checkbox' }),
                 this.createDom('span', {}, " show skipped"))
@@ -96,7 +96,7 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
     if (showSkipped.checked) {
       window.location = window.location.href.replace(/\?$/, '') + (self.document.location.search.length ? "&showSkipped=true" : "?showSkipped=true");
     } else {
-      window.location = window.location.href.replace(/&?showSkipped=true|\?showSkipped=true$/, '');      
+      window.location = window.location.href.replace(/&?showSkipped=true|\?showSkipped=true$/, '');
     }
   };
 };
