@@ -53,7 +53,7 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
       ),
 
       this.runnerDiv = this.createDom('div', { className: 'alert warning runner running' },
-          this.createDom('a', { className: 'run_spec btn btn-mini btn-info', href: '?' }, "run all"),
+          this.createDom('a', { className: 'run_spec btn btn-xs btn-mini btn-info', href: '?' }, "run all"),
           this.runnerMessageSpan = this.createDom('span', {}, "Running..."),
           this.finishedAtSpan = this.createDom('span', { className: 'finished-at' }, ""))
       );
@@ -64,7 +64,7 @@ jasmine.BootstrapReporter.prototype.reportRunnerStarting = function(runner) {
   for (var i = 0; i < suites.length; i++) {
     var suite = suites[i];
     var suiteDiv = this.createDom('div', { className: 'suite alert alert-block' },
-        this.createDom('a', { className: 'run_spec btn btn-mini btn-info', href: this.specHref(suite) }, "run"),
+        this.createDom('a', { className: 'run_spec btn btn-xs btn-mini btn-info', href: this.specHref(suite) }, "run"),
         this.createDom('a', { className: 'description', href: this.specHref(suite) }, suite.description));
     this.suiteDivs[suite.id] = suiteDiv;
     var parentDiv = this.outerDiv;
@@ -143,7 +143,7 @@ jasmine.BootstrapReporter.prototype.reportSpecResults = function(spec) {
     status = 'skipped alert-info';
   }
   var specDiv = this.createDom('div', { className: 'spec alert '  + status },
-      this.createDom('a', { className: 'run_spec btn btn-mini btn-info', href: this.specHref(spec) }, "run"),
+      this.createDom('a', { className: 'run_spec btn btn-xs btn-mini btn-info', href: this.specHref(spec) }, "run"),
       this.createDom('a', {
         className: 'description',
         href: this.specHref(spec),
