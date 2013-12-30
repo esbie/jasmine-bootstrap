@@ -91,9 +91,11 @@
   display: block;
 }
 
-/*.spec.alert.skipped{
+.spec.alert.skipped{
   background-color: #2f96b4;
-}*/
+  background-image: none;
+  color: red;
+}
 
 .suite.passed, .spec.passed,
 .suite.skipped, .spec.skipped {
