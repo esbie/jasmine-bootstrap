@@ -106,3 +106,10 @@
   color: #404040;
   line-height: normal;
 }
+
+label {
+  font-size: 13px;
+  font-weight: normal;
+  line-height: 18px;
+  vertical-align: middle;
+}
