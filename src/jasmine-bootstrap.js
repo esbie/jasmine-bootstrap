@@ -123,7 +123,7 @@ jasmine.BootstrapReporter.prototype.reportRunnerResults = function(runner) {
 
 jasmine.BootstrapReporter.prototype.reportSuiteResults = function(suite) {
   var results = suite.results();
-  var status = results.passed() ? 'passed alert-success' : 'failed alert-error';
+  var status = results.passed() ? 'passed alert-success' : 'failed alert-danger';
   if (results.totalCount === 0) { // todo: change this to check results.skipped
     status = 'skipped alert-info';
   }
