@@ -19,6 +19,7 @@
 .spec.alert.alert-success, .runner.alert.alert-success {
   background-color: #57A957;
   border-color: #469846;
+  background-image: none;
 }
 
 /* even with the mini size, these buttons don't quite fit inline! */
@@ -89,6 +90,10 @@
 .show-skipped .spec.skipped {
   display: block;
 }
+
+/*.spec.alert.skipped{
+  background-color: #2f96b4;
+}*/
 
 .suite.passed, .spec.passed,
 .suite.skipped, .spec.skipped {
