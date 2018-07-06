@@ -1,7 +1,7 @@
 JASMINE-BOOTSTRAP
 =================
 
-Do you like writing jasmine specs, but find the TrivialReporter underwhelming to look at? I took the standalone runner at http://pivotal.github.com/jasmine/download.html and Twitter's bootstrap css at http://twitter.github.com/bootstrap to create jasmine-bootstrap. Here's what it looks like:
+Do you like writing jasmine specs, but find the TrivialReporter underwhelming to look at? I took the standalone runner at https://github.com/jasmine/jasmine/releases and Twitter's bootstrap css at http://twitter.github.com/bootstrap to create jasmine-bootstrap. Here's what it looks like:
 
 ![BootstrapReporter](https://github.com/esbie/jasmine-bootstrap/raw/master/test/BootstrapReporter.png)
 
@@ -47,7 +47,7 @@ Authors
 
 **Pivotal Labs (jasmine-standalone)**
 
-+ http://pivotal.github.com/jasmine/download.html
++ https://github.com/jasmine/jasmine/releases
 
 **Mark Otto and Jacob Thorton (bootstrap)**
 
